@@ -1632,12 +1632,15 @@ self.C3_ExpressionFuncs = [
 		() => "donut",
 		() => "0",
 		() => "Loading cities...",
-		() => "Loading clues...",
 		() => "kelimeler",
 		() => 1857,
 		() => 69,
 		() => 185,
 		() => 543,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpInstVar();
+		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0();
@@ -1659,7 +1662,7 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => ((v0.GetValue() + (180 * f1())) % 5790);
+			return () => ((v0.GetValue() + (350 * f1())) % 5790);
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -1678,24 +1681,6 @@ self.C3_ExpressionFuncs = [
 			return () => ((((((n0.ExpObject() * 386) - v1.GetValue()) + 8106) % 7720) - 193) - (v2.GetValue() * 6));
 		},
 		() => "03 • İpucu zamanı ve cevaplar",
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (v0.GetValue() + 1);
-		},
-		() => 10,
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			const v2 = p._GetNode(2).GetVar();
-			return () => n0.ExpObject(v1.GetValue(), v2.GetValue());
-		},
-		() => 2,
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (("Time is up! The city was " + v0.GetValue()) + ".");
-		},
-		() => "0 points • Next city...",
-		() => 2.5,
 		() => "cityhunt",
 		p => {
 			const n0 = p._GetNode(0);
@@ -1710,6 +1695,7 @@ self.C3_ExpressionFuncs = [
 			const v0 = p._GetNode(0).GetVar();
 			return () => v0.GetValue();
 		},
+		() => 2,
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const v1 = p._GetNode(1).GetVar();
@@ -1717,11 +1703,11 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			return () => ("Correct! " + v0.GetValue());
+			return () => (and("+", ((6 - v0.GetValue()) * 10)) + " points • Next city...");
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			return () => (and("+", ((6 - v0.GetValue()) * 10)) + " points • Next city...");
+			return () => (v0.GetValue() + 1);
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -1757,10 +1743,16 @@ self.C3_ExpressionFuncs = [
 			const v1 = p._GetNode(1).GetVar();
 			return () => n0.ExpObject(0, v1.GetValue());
 		},
+		() => 10,
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const v1 = p._GetNode(1).GetVar();
 			return () => and((and("CITY ", v0.GetValue()) + " / "), v1.GetValue());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => and("1. ", n0.ExpObject(1, v1.GetValue()));
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -1790,23 +1782,19 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			return () => (761 - (v0.GetValue() * 1.5));
+			return () => (765 - (v0.GetValue() * 1.5));
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			return () => (440 - (v0.GetValue() * 3));
+			return () => (242 - (v0.GetValue() * 3));
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			return () => (700 - (v0.GetValue() * 1.5));
+			return () => (670 - (v0.GetValue() * 1.5));
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			return () => (490 - (v0.GetValue() * 3));
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (865 - (v0.GetValue() * 1.5));
+			return () => (947 - (v0.GetValue() * 1.5));
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -1842,6 +1830,47 @@ self.C3_ExpressionFuncs = [
 			return () => (100 * (1 - C3.clamp(((v0.GetValue() - 0.9) / 0.3), 0, 1)));
 		},
 		() => 1.2,
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const n2 = p._GetNode(2);
+			const v3 = p._GetNode(3).GetVar();
+			const v4 = p._GetNode(4).GetVar();
+			return () => and((and((n0.ExpObject() + "\n"), v1.GetValue()) + ". "), n2.ExpObject(v3.GetValue(), v4.GetValue()));
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (("Time is up! " + v0.GetValue()) + " • 0 points • Next city...");
+		},
+		() => 2.5,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			const v2 = p._GetNode(2).GetVar();
+			const v3 = p._GetNode(3).GetVar();
+			return () => and(and(v0.GetValue(), ". "), n1.ExpObject(v2.GetValue(), v3.GetValue()));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => ((n0.ExpObject() + ((n1.ExpInstVar() - 1) * 54)) + 18);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const f2 = p._GetNode(2).GetBoundMethod();
+			return () => f0(0.65, (n1.ExpInstVar() + f2()));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			return () => ((n0.ExpObject() + ((n1.ExpInstVar() - 1) * 54)) + (18 * Math.pow((1 - (n2.ExpInstVar() / 0.65)), 3)));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (100 * (1 - Math.pow((1 - (n0.ExpInstVar() / 0.65)), 3)));
+		},
 		() => "Buttons",
 		() => "Giris",
 		() => 0.2,
@@ -1851,7 +1880,59 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() + 120);
 		},
-		() => 1855
+		() => 1855,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0(1.2, 2.8);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0(14, 34);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0(70, 100);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => f0(28, (f1() - 28));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => f0(36, (f1() - 36));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0((-30), 30);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => f0((-1.8), n1.ExpInstVar());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => (n0.ExpInstVar() + f1());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			return () => (n0.ExpInstVar() * Math.pow(Math.sin(C3.toRadians((180 * C3.clamp((n1.ExpInstVar() / n2.ExpInstVar()), 0, 1)))), 2));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			return () => (n0.ExpInstVar() * (0.55 + (0.45 * Math.sin(C3.toRadians((180 * C3.clamp((n1.ExpInstVar() / n2.ExpInstVar()), 0, 1)))))));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => (-f0(0.2, 1.8));
+		}
 ];
 
 
