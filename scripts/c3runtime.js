@@ -1658,11 +1658,37 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "City data must contain 15 cities and 5 clues per city.",
 		() => "Could not load cities. Please return Home and try again.",
+		() => "01b • Film şeridini sürükle",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			const f2 = p._GetNode(2).GetBoundMethod();
+			return () => f0(0, (v1.GetValue() - f2()));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("oyun");
+		},
+		() => 150,
+		() => 541,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			return () => Math.abs((f0("oyun") - v1.GetValue()));
+		},
+		() => 12,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			return () => (f0("oyun") - v1.GetValue());
+		},
+		() => 0.15,
 		() => "02 • Film şeridi",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => ((v0.GetValue() + (350 * f1())) % 5790);
+			const v2 = p._GetNode(2).GetVar();
+			return () => (((((v0.GetValue() + (350 * f1())) - v2.GetValue()) % 5790) + 5790) % 5790);
 		},
 		p => {
 			const n0 = p._GetNode(0);
